@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-22 col-auto w-75 ">
+            <h1 class="my-4"></h1>
+            <h1>{% trans "Statuses" %}</h1>
+            <a class="btn btn-primary mb-3" href="/statuses/create/">Создать статус</a>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{% trans "Status name" %}</th>
+                    <th>{% trans "Created" %}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if statuses %}
+                {% for status in statuses %}
+                <tr>
+                    <td>{{ status.id }}</td>
+                    <td>{{ status.name }}</td>
+                    <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'status_update' status.id %}" class="icon-link-hover badge rounded-pill bg-info text-decoration-none">{% trans "Update" %}</a>
+                        <a href="{% url 'status_delete' status.id %}" class="badge rounded-pill bg-danger text-decoration-none">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
