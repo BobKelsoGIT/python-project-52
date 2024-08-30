@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from .signup_form import CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
 
 class UsersListView(ListView):
@@ -23,9 +25,26 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     success_message = _('User successfully created')
 
 
-class UserUpdateView(UpdateView):
-    pass
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['first_name', 'last_name']
+    template_name = 'form.html'
+    success_url = reverse_lazy('users')
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj != self.request.user:
+            raise PermissionDenied("You are not allowed to update this user.")
+        return obj
 
 
-class UserDeleteView(DeleteView):
-    pass
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy('users')
+    template_name = 'users/delete_user_confirmation.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj != self.request.user:
+            raise PermissionDenied("You are not allowed to delete this user.")
+        return obj
