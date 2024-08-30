@@ -22,10 +22,16 @@
                 <tr>
                     <td>{{ status.id }}</td>
                     <td>{{ status.name }}</td>
-                    <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
+                    <td>{{ user.date_created|date:"d.m.Y H:i" }}</td>
                     <td>
-                        <a href="{% url 'status_update' status.id %}" class="icon-link-hover badge rounded-pill bg-info text-decoration-none">{% trans "Update" %}</a>
-                        <a href="{% url 'status_delete' status.id %}" class="badge rounded-pill bg-danger text-decoration-none">{% trans "Delete" %}</a>
+                        <a href="{% url 'status_update' status.id %}"
+                           class="icon-link-hover badge rounded-pill bg-info text-decoration-none">
+                            {% trans "Update" %}
+                        </a>
+                        <a href="{% url 'status_delete' status.id %}"
+                           class="badge rounded-pill bg-danger text-decoration-none">
+                            {% trans "Delete" %}
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
