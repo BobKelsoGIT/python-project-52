@@ -15,6 +15,14 @@ gunicorn = "^23.0.0"
 django-bootstrap5 = "^24.2"
 
 
+[tool.poetry.group.dev.dependencies]
+pytest-django = "^4.8.0"
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "task_manager.settings"
+
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
