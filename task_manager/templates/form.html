@@ -2,19 +2,21 @@
 
 {% load i18n %}
 {% load django_bootstrap5 %}
-{% bootstrap_messages %}
+{% block title %}
+    {{ title }} | {% translate 'Task Manager' %}
+{% endblock %}
 {% block content %}
 <body class="d-flex flex-column min-vh-100">
     <div class="container d-flex align-items-center justify-content-center h-100">
-        <div class="card bg-light border-0 shadow mt-5 w-100">
+        <div class="card bg-light border-0 shadow mt-5 w-50">
             <div class="card-body">
 
-                <h1 class="text-center mb-4">{{ header }}</h1>
+                <h1 class="text-center mb-0">{{ title }}</h1>  <!-- Изменено с 'header' на 'title' -->
 
                 <form method="post">
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    {% bootstrap_button "Submit" button_type="submit" button_class="btn btn-primary" %}
+                    {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}  <!-- Добавлено использование button_text -->
                 </form>
 
             </div>

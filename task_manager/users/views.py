@@ -10,7 +10,7 @@ from django.core.exceptions import PermissionDenied
 
 class UsersListView(ListView):
     model = User
-    template_name = 'users/users_list.html'
+    template_name = 'users/index.html'
     context_object_name = 'users'
     extra_context = {
         'title': _('Users')
@@ -23,6 +23,10 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = 'form.html'
     success_url = reverse_lazy('login')
     success_message = _('User successfully created')
+    extra_context = {
+        'title': _('Create user'),
+        'button_text': _('Create'),
+    }
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -30,6 +34,11 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['first_name', 'last_name']
     template_name = 'form.html'
     success_url = reverse_lazy('users')
+    success_message = _('User successfully updated')
+    extra_context = {
+        'title': _('Update user'),
+        'button_text': _('Update'),
+    }
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)

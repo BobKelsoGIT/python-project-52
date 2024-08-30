@@ -13,6 +13,10 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'form.html'
     next_page = reverse_lazy('home')
     success_message = _('Logged in successfully!')
+    extra_context = {
+        'title': _('Login'),
+        'button_text': _('Log in'),
+    }
 
 
 class UserLogoutView(SuccessMessageMixin, LogoutView):
