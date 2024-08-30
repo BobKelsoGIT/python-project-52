@@ -14,29 +14,11 @@
 <body class="d-flex flex-column min-vh-100">
 {% include 'navbar.html' %}
 <div class="container wrapper flex-grow-1">
-
-
-    <h1 class="my-4">
-<!--        текст-->
-    </h1>
-
-    <h1 class="my-4"></h1>
-    <div class="card">
-        <div class="card-body p-5 bg-light">
-            <div class="display-4">Привет от Хекслета!</div>
-            <p class="lead">Практические курсы по программированию</p>
-            <hr>
-            <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io">Узнать больше</a>
-        </div>
-    </div>
-
+    {% block content %}
+    {% endblock %}
 </div>
 <footer>
-    <div class="container my-5 pt-4 border-top">
-        <a target="_blank" href="https://ru.hexlet.io">Hexlet</a>
-    </div>
+    {% include 'footer.html' %}
 </footer>
-
-
 </body>
 </html>
