@@ -1,9 +1,9 @@
 from django.urls import path
-from . import views
+from .views import ListStatusView, CreatStatusView, UpdateStatusView, DeleteStatusView
 
 urlpatterns = [
-    path('', views.ListStatusView.as_view(), name='statuses_list'),
-    path('create/', views.CreatStatusView.as_view(), name='status_create'),
-    path('<int:pk>/update/', views.UpdateStatusView.as_view(), name='status_update'),
-    path('<int:pk>/delete/', views.DeleteStatusView.as_view(), name='status_delete'),
+    path('', ListStatusView.as_view(), name='statuses_list'),
+    path('create/', CreatStatusView.as_view(), name='status_create'),
+    path('<int:pk>/update/', UpdateStatusView.as_view(), name='status_update'),
+    path('<int:pk>/delete/', DeleteStatusView.as_view(), name='status_delete'),
 ]
