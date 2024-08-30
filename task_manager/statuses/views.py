@@ -1,3 +1,36 @@
-from django.shortcuts import render
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import gettext_lazy as _
+from django.urls import reverse_lazy
+from .models import Status
+from .form import StatusForm
 
-# Create your views here.
+
+class ListStatusView(LoginRequiredMixin, ListView):
+    model = Status
+    template_name = 'statuses/index.html'
+    context_object_name = 'statuses'
+
+
+class CreatStatusView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Status
+    form_class = StatusForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('statuses_list')
+    success_message = _('Status successfully created')
+
+
+class UpdateStatusView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Status
+    form_class = StatusForm
+    template_name = 'form.html'
+    success_url = reverse_lazy('statuses_list')
+    success_message = _('Status successfully updated')
+
+
+class DeleteStatusView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Status
+    template_name = 'delete_form.html'
+    success_url = reverse_lazy('statuses_list')
+    success_message = _('Status successfully deleted')
