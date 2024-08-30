@@ -7,17 +7,17 @@
     <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'users' %}">Users</a>
+                <a class="nav-link " href="{% url 'users' %}">Users</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'statuses' %}">Statuses</a>
+                <a class="nav-link " href="{% url 'statuses_list' %}">Statuses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'labels' %}">Labels</a>
+                <a class="nav-link" href="#">Labels</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'tasks' %}">Tasks</a>
+                <a class="nav-link" href="{% url 'tasks_list' %}">Tasks</a>
             </li>
             {% endif %}
         </ul>
@@ -26,7 +26,7 @@
             <li class="nav-item">
                 <form method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                    <button type="submit" class="btn btn-outline-danger me-3">Logout</button>
                 </form>
             </li>
         </ul>
@@ -37,7 +37,7 @@
                 <a class="btn btn-success me-2" href="{% url 'login' %}">Log in</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-primary" href="{% url 'signup' %}">Sign up</a>
+                <a class="btn btn-primary me-3" href="{% url 'signup' %}">Sign up</a>
             </li>
         </ul>
         {% endif %}
