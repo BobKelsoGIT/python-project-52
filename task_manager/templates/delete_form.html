@@ -3,14 +3,17 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Delete User" %} | Task Manager
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-auto">
-            <h1 class="my-4">{% trans "Are you sure you want to delete your account?" %}</h1>
+            <h1 class="my-4">
+                {% blocktrans with object as obj %}
+                Are you sure you want to delete {{ obj }}?
+                {% endblocktrans %}
+            </h1>
 
             <form class="text-center" method="post">
                 {% csrf_token %}
