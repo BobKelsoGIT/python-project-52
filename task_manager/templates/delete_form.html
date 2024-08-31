@@ -18,7 +18,7 @@
             <form class="text-center" method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
-                <a href="{% url 'users' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+                <a href="{{ cancel_url }}" class="btn btn-secondary">{% trans "Cancel" %}</a>
             </form>
         </div>
     </div>
