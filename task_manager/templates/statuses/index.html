@@ -6,7 +6,7 @@
         <div class="col-md-22 col-auto w-75 ">
             <h1 class="my-4"></h1>
             <h1>{% trans "Statuses" %}</h1>
-            <a class="btn btn-primary mb-3" href="/statuses/create/">Создать статус</a>
+            <a class="btn btn-primary mb-3" href="/statuses/create/">{% trans 'Create status' %}</a>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ status.id }}</td>
                     <td>{{ status.name }}</td>
-                    <td>{{ user.date_created|date:"d.m.Y H:i" }}</td>
+                    <td>{{ status.date_created|date:"d.m.Y H:i" }}</td>
                     <td>
                         <a href="{% url 'status_update' status.id %}"
                            class="icon-link-hover badge rounded-pill bg-info text-decoration-none">
