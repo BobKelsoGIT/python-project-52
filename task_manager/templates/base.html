@@ -13,7 +13,13 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 {% include 'navbar.html' %}
-{% bootstrap_messages %}
+{% if messages %}
+<div class="alert alert-info">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
 <div class="container wrapper flex-grow-1">
     {% block content %}
     {% endblock %}
