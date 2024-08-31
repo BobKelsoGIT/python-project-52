@@ -3,9 +3,11 @@ from .models import User
 from django.utils.translation import gettext_lazy as _
 from .signup_form import CreateUserForm
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.contrib import messages
 
 
 class UsersListView(ListView):
@@ -52,8 +54,20 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('users')
     template_name = 'delete_form.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_url'] = reverse_lazy('users')
+        return context
+
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
         if obj != self.request.user:
-            raise PermissionDenied("You are not allowed to delete this user.")
+            raise PermissionDenied("You are not allowed to delete other users.")
         return obj
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            messages.error(request, _('You are not allowed to delete other users.'))
+            return redirect('users')

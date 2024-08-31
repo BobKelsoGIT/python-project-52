@@ -42,3 +42,8 @@ class DeleteStatusView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully deleted')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cancel_url'] = reverse_lazy('statuses_list')
+        return context
