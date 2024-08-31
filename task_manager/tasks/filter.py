@@ -13,16 +13,18 @@ class TaskFilter(django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor']
+        fields = ['status', 'executor', 'labels']
         widgets = {
-            'status': forms.Select(attrs={'class': 'form-select ml-2 mr-3'}),
-            'executor': forms.Select(attrs={'class': 'form-select mr-3 ml-2'}),
+            'status': forms.Select(),
+            'executor': forms.Select(),
+            'labels': forms.Select()
         }
 
     def __init__(self, *args, **kwargs):
         super(TaskFilter, self).__init__(*args, **kwargs)
         self.filters['status'].field.widget.attrs.update({'class': 'form-select ml-2 mr-3'})
         self.filters['executor'].field.widget.attrs.update({'class': 'form-select mr-3 ml-2'})
+        self.filters['labels'].field.widget.attrs.update({'class': 'form-select mr-3 ml-2'})
 
     def show_own_task(self, queryset, name, value):
         user = self.request.user if self.request else None
