@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-22 col-auto w-75 ">
+            <h1 class="my-4"></h1>
+            <h1>{% trans "Tasks" %}</h1>
+            <a class="btn btn-primary mb-3" href="/tasks/create/">{% trans "Create task" %}</a>
+            <div class="card mb-3">
+                <div class="card-body bg-light">
+                    <form class="form-inline center" method="get">
+                        {{ filter.form.as_p }}
+                        <input class="btn btn-primary" type="submit" value="{% trans "Show" %}">
+                    </form>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{% trans "Task name" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "Author" %}</th>
+                    <th>{% trans "Executor" %}</th>
+                    <th>{% trans "Created" %}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if tasks %}
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>{{ task.author }}</td>
+                    <td>{{ task.executor }}</td>
+                    <td>{{ task.date_created|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'task_update' task.id %}"
+                           class="icon-link-hover badge rounded-pill bg-info text-decoration-none">
+                            {% trans "Update" %}
+                        </a>
+                        <a href="{% url 'task_delete' task.id %}"
+                           class="badge rounded-pill bg-danger text-decoration-none">
+                            {% trans "Delete" %}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
