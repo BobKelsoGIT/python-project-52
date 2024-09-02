@@ -50,7 +50,7 @@ class LabelViewsTest(TestCase):
 
     def test_label_delete_protected_error(self):
         protected_label = Label.objects.create(name='Referenced Label')
-        Status.objects.create(name='First Statuse')
+        Status.objects.create(name='First Status')
         task = Task.objects.create(
             name='Test Task',
             description='Task description',
