@@ -48,6 +48,13 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
             raise PermissionDenied("You are not allowed to update this user.")
         return obj
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            return super().dispatch(request, *args, **kwargs)
+        except PermissionDenied:
+            messages.error(request, _('You are not allowed to update other users.'))
+            return redirect('users')
+
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     model = User
