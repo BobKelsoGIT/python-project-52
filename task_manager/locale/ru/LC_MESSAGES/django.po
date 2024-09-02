@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 15:46+0300\n"
+"POT-Creation-Date: 2024-09-02 19:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,41 +39,44 @@ msgstr "Метка"
 msgid "Labels"
 msgstr "Метки"
 
-#: task_manager/labels/views.py:25
+#: task_manager/labels/views.py:27
 msgid "Label successfully created"
 msgstr "Метка успешно создана"
 
-#: task_manager/labels/views.py:27 task_manager/templates/labels/index.html:9
+#: task_manager/labels/views.py:29 task_manager/templates/labels/index.html:9
 msgid "Create label"
 msgstr "Создать метку"
 
-#: task_manager/labels/views.py:28 task_manager/statuses/views.py:24
-#: task_manager/tasks/views.py:28 task_manager/users/views.py:30
+#: task_manager/labels/views.py:30 task_manager/statuses/views.py:24
+#: task_manager/tasks/views.py:28 task_manager/users/views.py:33
 msgid "Create"
 msgstr "Создать"
 
-#: task_manager/labels/views.py:37
+#: task_manager/labels/views.py:39
 msgid "Label successfully updated"
 msgstr "Метка успешно обновлена"
 
-#: task_manager/labels/views.py:39
+#: task_manager/labels/views.py:41
 msgid "Update label"
 msgstr "Обновить метку"
 
-#: task_manager/labels/views.py:40 task_manager/statuses/views.py:36
+#: task_manager/labels/views.py:42 task_manager/statuses/views.py:36
 #: task_manager/tasks/views.py:44 task_manager/templates/labels/index.html:29
 #: task_manager/templates/statuses/index.html:29
 #: task_manager/templates/tasks/index.html:43
-#: task_manager/templates/users/index.html:31 task_manager/users/views.py:42
+#: task_manager/templates/users/index.html:31 task_manager/users/views.py:45
 msgid "Update"
 msgstr "Обновить"
 
-#: task_manager/labels/views.py:48
+#: task_manager/labels/views.py:50
 msgid "Label successfully deleted"
 msgstr "Метка успешно удалена"
 
-#: task_manager/labels/views.py:59
-msgid "This label cannot be deleted because it is referenced by other objects."
+#: task_manager/labels/views.py:61
+#, fuzzy
+#| msgid ""
+#| "This label cannot be deleted because it is referenced by other objects."
+msgid "This label cannot be deleted because itis referenced by other objects."
 msgstr "Метка не может быть удалена, пока связана с заданиями"
 
 #: task_manager/statuses/models.py:21 task_manager/tasks/models.py:35
@@ -86,13 +89,14 @@ msgstr "Статус"
 #: task_manager/templates/navbar.html:14
 #: task_manager/templates/statuses/index.html:8
 msgid "Statuses"
-msgstr "Статус"
+msgstr "Статусы"
 
 #: task_manager/statuses/views.py:21
 msgid "Status successfully created"
 msgstr "Статус успешно создан"
 
 #: task_manager/statuses/views.py:23
+#: task_manager/templates/statuses/index.html:9
 msgid "Create status"
 msgstr "Создать статус"
 
@@ -162,6 +166,9 @@ msgid ""
 "                Are you sure you want to delete %(obj)s?\n"
 "                "
 msgstr ""
+"\n"
+"                Уверены, что хотите удалить %(obj)s?\n"
+"                "
 
 #: task_manager/templates/delete_form.html:20
 #: task_manager/templates/labels/index.html:33
@@ -187,7 +194,8 @@ msgid "Created"
 msgstr "Дата создиния"
 
 #: task_manager/templates/navbar.html:10
-#: task_manager/templates/users/index.html:8 task_manager/users/views.py:18
+#: task_manager/templates/users/index.html:8 task_manager/users/models.py:12
+#: task_manager/users/views.py:21
 msgid "Users"
 msgstr "Пользователи"
 
@@ -231,6 +239,12 @@ msgstr "Имя пользователя"
 msgid "Full name"
 msgstr "Полное имя"
 
+#: task_manager/users/models.py:11
+#, fuzzy
+#| msgid "Users"
+msgid "User"
+msgstr "Пользователи"
+
 #: task_manager/users/signup_form.py:9
 msgid "First name"
 msgstr "Иня"
@@ -239,23 +253,27 @@ msgstr "Иня"
 msgid "Last name"
 msgstr "Фамилия"
 
-#: task_manager/users/views.py:27
+#: task_manager/users/views.py:30
 msgid "User successfully created"
 msgstr "Пользователь успешно создан"
 
-#: task_manager/users/views.py:29
+#: task_manager/users/views.py:32
 msgid "Create user"
 msgstr "Создать пользователя"
 
-#: task_manager/users/views.py:39
+#: task_manager/users/views.py:42
 msgid "User successfully updated"
 msgstr "Пользователь успешно обновлен"
 
-#: task_manager/users/views.py:41
+#: task_manager/users/views.py:44
 msgid "Update user"
 msgstr "Обновить пользователя"
 
-#: task_manager/users/views.py:72
+#: task_manager/users/views.py:59
+msgid "You are not allowed to update other users."
+msgstr "У вас нет прав для удаления других пользователей"
+
+#: task_manager/users/views.py:85
 msgid "You are not allowed to delete other users."
 msgstr "У вас нет прав для удаления других пользователей"
 
