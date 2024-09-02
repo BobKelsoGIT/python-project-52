@@ -1,4 +1,7 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import (ListView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
 from .models import User
 from django.utils.translation import gettext_lazy as _
 from .signup_form import CreateUserForm
@@ -52,7 +55,9 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         try:
             return super().dispatch(request, *args, **kwargs)
         except PermissionDenied:
-            messages.error(request, _('You are not allowed to update other users.'))
+            messages.error(request,
+                           _('You are not allowed to update other users.')
+                           )
             return redirect('users')
 
 
@@ -76,5 +81,6 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         try:
             return super().dispatch(request, *args, **kwargs)
         except PermissionDenied:
-            messages.error(request, _('You are not allowed to delete other users.'))
+            messages.error(request,
+                           _('You are not allowed to delete other users.'))
             return redirect('users')

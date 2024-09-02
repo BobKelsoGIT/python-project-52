@@ -9,7 +9,8 @@ class StatusViewsTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = User.objects.create_user(username='testuser', password='testpass')
+        cls.user = User.objects.create_user(username='testuser',
+                                            password='testpass')
 
     def setUp(self):
         self.client.login(username='testuser', password='testpass')
@@ -31,7 +32,8 @@ class StatusViewsTest(TestCase):
         self.assertTrue(Status.objects.filter(name='New Status').exists())
 
     def test_status_update(self):
-        response = self.client.post(reverse('status_update', kwargs={'pk': self.status.pk}), {
+        response = self.client.post(reverse('status_update',
+                                            kwargs={'pk': self.status.pk}), {
             'name': 'Updated Status'
         })
         self.assertEqual(response.status_code, 302)
@@ -40,7 +42,8 @@ class StatusViewsTest(TestCase):
         self.assertEqual(self.status.name, 'Updated Status')
 
     def test_status_delete(self):
-        response = self.client.post(reverse('status_delete', kwargs={'pk': self.status.pk}))
+        response = self.client.post(reverse('status_delete',
+                                            kwargs={'pk': self.status.pk}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('statuses_list'))
         with self.assertRaises(ObjectDoesNotExist):
@@ -58,7 +61,8 @@ class StatusViewsTest(TestCase):
 
     def test_status_update_not_logged_in(self):
         self.client.logout()
-        response = self.client.post(reverse('status_update', kwargs={'pk': self.status.pk}), {
+        response = self.client.post(reverse('status_update',
+                                            kwargs={'pk': self.status.pk}), {
             'name': 'Updated Status'
         })
         self.assertEqual(response.status_code, 302)
@@ -69,7 +73,8 @@ class StatusViewsTest(TestCase):
 
     def test_status_delete_not_logged_in(self):
         self.client.logout()
-        response = self.client.post(reverse('status_delete', kwargs={'pk': self.status.pk}))
+        response = self.client.post(reverse('status_delete',
+                                            kwargs={'pk': self.status.pk}))
         self.assertEqual(response.status_code, 302)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))

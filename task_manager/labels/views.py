@@ -1,4 +1,7 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import (ListView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
@@ -54,6 +57,7 @@ class DeleteLabelView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
-        except ProtectedError as e:
-            messages.error(request, _('This label cannot be deleted because it is referenced by other objects.'))
+        except ProtectedError:
+            messages.error(request, _('This label cannot be deleted because it'
+                                      'is referenced by other objects.'))
             return HttpResponseRedirect(reverse_lazy('labels_list'))
