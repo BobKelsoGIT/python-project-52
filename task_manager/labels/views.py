@@ -4,7 +4,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from django.core.exceptions import PermissionDenied
 from .models import Label
 from .label_form import LabelForm
 from django.db.models import ProtectedError
