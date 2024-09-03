@@ -1,19 +1,22 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (ListView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
 from django.contrib.messages.views import SuccessMessageMixin
+from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from .models import Status
 from .status_form import StatusForm
 
 
-class ListStatusView(LoginRequiredMixin, ListView):
+class ListStatusView(AuthRequiredMixin, ListView):
     model = Status
     template_name = 'statuses/index.html'
     context_object_name = 'statuses'
 
 
-class CreatStatusView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class CreatStatusView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Status
     form_class = StatusForm
     template_name = 'form.html'
@@ -25,7 +28,7 @@ class CreatStatusView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class UpdateStatusView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateStatusView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
     template_name = 'form.html'
@@ -37,13 +40,14 @@ class UpdateStatusView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     }
 
 
-class DeleteStatusView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteStatusView(AuthRequiredMixin, DeleteProtectionMixin,
+                       SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'delete_form.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully deleted')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cancel_url'] = reverse_lazy('statuses_list')
-        return context
+    protected_message = _('Can not be deleted. In use.')
+    protected_url = reverse_lazy('statuses_list')
+    extra_context = {
+        'cancel_url': reverse_lazy('statuses_list')
+    }

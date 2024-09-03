@@ -2,24 +2,21 @@ from django.views.generic import (ListView,
                                   CreateView,
                                   UpdateView,
                                   DeleteView)
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
 from .models import Label
 from .label_form import LabelForm
-from django.db.models import ProtectedError
-from django.contrib import messages
 
 
-class ListLabelView(LoginRequiredMixin, ListView):
+class ListLabelView(AuthRequiredMixin, ListView):
     model = Label
     template_name = 'labels/index.html'
     context_object_name = 'labels'
 
 
-class CreateLabelView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class CreateLabelView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     form_class = LabelForm
     template_name = 'form.html'
@@ -31,7 +28,7 @@ class CreateLabelView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class UpdateLabelView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateLabelView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
     template_name = 'form.html'
@@ -43,21 +40,15 @@ class UpdateLabelView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     }
 
 
-class DeleteLabelView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteLabelView(DeleteProtectionMixin, AuthRequiredMixin,
+                      SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'delete_form.html'
     success_url = reverse_lazy('labels_list')
-    success_message = _('Label successfully deleted')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cancel_url'] = reverse_lazy('labels_list')
-        return context
-
-    def post(self, request, *args, **kwargs):
-        try:
-            return super().post(request, *args, **kwargs)
-        except ProtectedError:
-            messages.error(request, _('This label cannot be deleted because it'
-                                      'is referenced by other objects.'))
-            return HttpResponseRedirect(reverse_lazy('labels_list'))
+    success_message = _('Label was successfully deleted')
+    protected_url = reverse_lazy('labels_list')
+    protected_message = _('This label cannot be deleted because it'
+                          'is referenced by other objects.')
+    extra_context = {
+        'cancel_url': reverse_lazy('labels_list')
+    }

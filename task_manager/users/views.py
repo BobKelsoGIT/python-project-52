@@ -1,10 +1,15 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import User
-from .signup_form import CreateUserForm
+from django.views.generic import (ListView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
+from django.contrib.messages.views import SuccessMessageMixin
+from task_manager.mixins import (AuthRequiredMixin,
+                                 UserPermissionMixin,
+                                 )
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-from task_manager.mixins import UserPermissionMixin
-from django.contrib.messages.views import SuccessMessageMixin
+from .models import User
+from .signup_form import CreateUserForm
 
 
 class UsersListView(ListView):
@@ -28,24 +33,28 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     }
 
 
-class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(AuthRequiredMixin, UserPermissionMixin,
+                     SuccessMessageMixin, UpdateView):
     model = User
     fields = ['first_name', 'last_name']
     template_name = 'form.html'
     success_url = reverse_lazy('users')
     success_message = _('User successfully updated')
+    permission_url = reverse_lazy('users')
     extra_context = {
         'title': _('Update user'),
         'button_text': _('Update'),
     }
 
 
-class UserDeleteView(UserPermissionMixin, DeleteView):
+class UserDeleteView(AuthRequiredMixin, UserPermissionMixin,
+                     SuccessMessageMixin, DeleteView):
     model = User
     success_url = reverse_lazy('users')
     template_name = 'delete_form.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cancel_url'] = reverse_lazy('users')
-        return context
+    success_message = _('User is successfully deleted')
+    permission_message = _('You have no rights to change another user.')
+    permission_url = reverse_lazy('users')
+    extra_context = {
+        'cancel_url': reverse_lazy('users')
+    }
