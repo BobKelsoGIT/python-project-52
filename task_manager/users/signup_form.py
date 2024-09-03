@@ -5,6 +5,7 @@ from .models import User
 
 
 class CreateUserForm(UserCreationForm):
+    usable_password = None
     first_name = forms.CharField(
         max_length=150, required=True, label=_("First name")
     )
