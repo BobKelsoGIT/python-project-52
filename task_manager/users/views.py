@@ -1,16 +1,10 @@
-from django.views.generic import (ListView,
-                                  CreateView,
-                                  UpdateView,
-                                  DeleteView)
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import User
-from django.utils.translation import gettext_lazy as _
 from .signup_form import CreateUserForm
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
+from task_manager.mixins import UserPermissionMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
-from django.contrib import messages
 
 
 class UsersListView(ListView):
@@ -34,7 +28,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     }
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+class UserUpdateView(UserPermissionMixin, SuccessMessageMixin, UpdateView):
     model = User
     fields = ['first_name', 'last_name']
     template_name = 'form.html'
@@ -45,23 +39,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         'button_text': _('Update'),
     }
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
-        if obj != self.request.user:
-            raise PermissionDenied("You are not allowed to update this user.")
-        return obj
 
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            return super().dispatch(request, *args, **kwargs)
-        except PermissionDenied:
-            messages.error(request,
-                           _('You are not allowed to update other users.')
-                           )
-            return redirect('users')
-
-
-class UserDeleteView(LoginRequiredMixin, DeleteView):
+class UserDeleteView(UserPermissionMixin, DeleteView):
     model = User
     success_url = reverse_lazy('users')
     template_name = 'delete_form.html'
@@ -70,17 +49,3 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['cancel_url'] = reverse_lazy('users')
         return context
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
-        if obj != self.request.user:
-            raise PermissionDenied("You are not allowed to delete other users.")
-        return obj
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            return super().dispatch(request, *args, **kwargs)
-        except PermissionDenied:
-            messages.error(request,
-                           _('You are not allowed to delete other users.'))
-            return redirect('users')
