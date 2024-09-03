@@ -1,23 +1,35 @@
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (CreateView,
+                                  DetailView,
+                                  UpdateView,
+                                  DeleteView)
 from django.contrib.messages.views import SuccessMessageMixin
+from task_manager.mixins import AuthRequiredMixin, AuthorDeletionMixin
 from django.utils.translation import gettext_lazy as _
+from django_filters.views import FilterView
 from django.urls import reverse_lazy
-from django.core.exceptions import PermissionDenied
 from .models import Task
 from .task_form import TaskForm
-from django_filters.views import FilterView
 from .filter import TaskFilter
 
 
-class ListTaskView(LoginRequiredMixin, FilterView):
+class ListTaskView(AuthRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
     filterset_class = TaskFilter
 
 
-class CreateTaskView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class DetailTaskView(AuthRequiredMixin, DetailView):
+    model = Task
+    template_name = 'tasks/detail.html'
+    context_object_name = 'task'
+    extra_context = {
+        'title': _('Task details'),
+        'Task details': _('Task details')
+    }
+
+
+class CreateTaskView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'form.html'
@@ -33,7 +45,7 @@ class CreateTaskView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class UpdateTaskView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateTaskView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name = 'form.html'
@@ -45,19 +57,15 @@ class UpdateTaskView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     }
 
 
-class DeleteTaskView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteTaskView(AuthRequiredMixin, AuthorDeletionMixin,
+                     SuccessMessageMixin, DeleteView):
     model = Task
     template_name = 'delete_form.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task successfully deleted')
-
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
-        if obj.author != self.request.user:
-            raise PermissionDenied("You are not allowed to delete this task.")
-        return obj
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cancel_url'] = reverse_lazy('tasks_list')
-        return context
+    auth_message = _('Log in please!')
+    author_message = _("Task can be deleted only by it's author!")
+    author_url = reverse_lazy('tasks_list')
+    extra_context = {
+        'cancel_url': reverse_lazy('tasks_list')
+    }

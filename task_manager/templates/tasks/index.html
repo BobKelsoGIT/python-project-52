@@ -4,9 +4,8 @@
 <div class="container">
     <div class="row justify-content-center ">
         <div class="col-md-22 col-auto w-75 ">
-            <h1 class="my-4"></h1>
-            <h1>{% trans "Tasks" %}</h1>
-            <a class="btn btn-primary mb-3" href="/tasks/create/">{% trans "Create task" %}</a>
+            <h1 class="my-4">{% trans "Tasks" %}</h1>
+            <a class="btn btn-primary mb-3" href="{% url 'task_create' %}">{% trans "Create task" %}</a>
             <div class="card mb-3">
                 <div class="card-body bg-light">
                     <form class="form-inline center" method="get">
@@ -32,7 +31,7 @@
                 {% for task in tasks %}
                 <tr>
                     <td>{{ task.id }}</td>
-                    <td>{{ task.name }}</td>
+                    <td><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></td>
                     <td>{{ task.status }}</td>
                     <td>{{ task.author }}</td>
                     <td>{{ task.executor }}</td>
