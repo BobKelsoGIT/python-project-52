@@ -41,6 +41,7 @@ class UserUpdateView(AuthRequiredMixin, UserPermissionMixin,
     success_url = reverse_lazy('users')
     success_message = _('User successfully updated')
     permission_url = reverse_lazy('users')
+    permission_message = _('You have no rights to change another user.')
     extra_context = {
         'title': _('Update user'),
         'button_text': _('Update'),
@@ -53,7 +54,7 @@ class UserDeleteView(AuthRequiredMixin, UserPermissionMixin,
     success_url = reverse_lazy('users')
     template_name = 'delete_form.html'
     success_message = _('User is successfully deleted')
-    permission_message = _('You have no rights to change another user.')
+    permission_message = _('You have no rights to delete another user.')
     permission_url = reverse_lazy('users')
     extra_context = {
         'cancel_url': reverse_lazy('users')
