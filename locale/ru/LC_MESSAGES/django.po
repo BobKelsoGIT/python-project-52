@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 19:22+0000\n"
+"POT-Creation-Date: 2024-09-04 23:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,7 +121,7 @@ msgid "Can not be deleted. In use."
 msgstr "Невозможно удалить статус, потому что он используется"
 
 #: task_manager/tasks/filter.py:11
-msgid "Show own tasks"
+msgid "Show self tasks"
 msgstr "Только свои задачи"
 
 #: task_manager/tasks/models.py:19
@@ -286,11 +286,11 @@ msgstr "Имя"
 msgid "Last name"
 msgstr "Фамилия"
 
-#: task_manager/users/forms.py:26
+#: task_manager/users/forms.py:25
 msgid "A user with that username already exists."
 msgstr "Пользователь с таким именем пользователя уже существует."
 
-#: task_manager/users/forms.py:36
+#: task_manager/users/forms.py:34
 msgid "Passwords must match"
 msgstr "Пароли должны совпадать"
 
@@ -337,4 +337,3 @@ msgstr "Войти"
 #: task_manager/views.py:27
 msgid "Logged out successfully!"
 msgstr "Вы разлогинены"
-
