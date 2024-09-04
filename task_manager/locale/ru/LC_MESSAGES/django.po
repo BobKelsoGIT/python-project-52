@@ -245,7 +245,7 @@ msgstr "Вход"
 
 #: task_manager/templates/navbar.html:43
 msgid "Sign up"
-msgstr "Зарегистрироваться"
+msgstr "Регистрация"
 
 #: task_manager/templates/statuses/index.html:14
 msgid "Status name"
