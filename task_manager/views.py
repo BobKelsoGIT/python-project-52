@@ -2,6 +2,7 @@ from django.views.generic.base import TemplateView
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.urls import reverse_lazy
 
 
@@ -24,4 +25,5 @@ class UserLogoutView(SuccessMessageMixin, LogoutView):
     success_message = _('Logged out successfully!')
 
     def dispatch(self, request, *args, **kwargs):
+        messages.info(request, _('Logged out successfully!'))
         return super().dispatch(request, *args, **kwargs)
