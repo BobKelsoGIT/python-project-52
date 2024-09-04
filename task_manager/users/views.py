@@ -9,7 +9,7 @@ from task_manager.mixins import (AuthRequiredMixin,
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from .models import User
-from .signup_form import CreateUserForm
+from .forms import UserForm
 
 
 class UsersListView(ListView):
@@ -23,7 +23,7 @@ class UsersListView(ListView):
 
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
-    form_class = CreateUserForm
+    form_class = UserForm
     template_name = 'form.html'
     success_url = reverse_lazy('login')
     success_message = _('User successfully created')
@@ -36,7 +36,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 class UserUpdateView(AuthRequiredMixin, UserPermissionMixin,
                      SuccessMessageMixin, UpdateView):
     model = User
-    form_class = CreateUserForm
+    form_class = UserForm
     template_name = 'form.html'
     success_url = reverse_lazy('users')
     success_message = _('User successfully updated')

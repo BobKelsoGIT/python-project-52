@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=150)
+    last_name = models.CharField(max_length=150)
 
     class Meta:
         verbose_name = _('User')
