@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Ivan Scherbakov <lolwut155@gmail.com>"]
 readme = "README.md"
-packages = [{include = "task_manager"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
