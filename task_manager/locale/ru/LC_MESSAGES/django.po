@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 13:49+0300\n"
+"POT-Creation-Date: 2024-09-04 14:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,7 +177,7 @@ msgstr "Войдите"
 msgid "Task can be deleted only by it's author!"
 msgstr "Задача может быть удалена только её автором!"
 
-#: task_manager/templates/base.html:7 task_manager/templates/form.html:6
+#: task_manager/templates/base.html:10 task_manager/templates/form.html:6
 #: task_manager/templates/index.html:8 task_manager/templates/navbar.html:3
 msgid "Task Manager"
 msgstr "Менеджер Задач"
@@ -236,11 +236,11 @@ msgid "Welcome"
 msgstr "Добро пожаловать"
 
 #: task_manager/templates/navbar.html:32
-msgid "Logout"
+msgid "Log out"
 msgstr "Выход"
 
-#: task_manager/templates/navbar.html:40 task_manager/views.py:17
-msgid "Login"
+#: task_manager/templates/navbar.html:40 task_manager/views.py:18
+msgid "Log in"
 msgstr "Вход"
 
 #: task_manager/templates/navbar.html:43
@@ -319,6 +319,9 @@ msgstr "У вас нет прав для удаления других поль�
 msgid "Logged in successfully!"
 msgstr "Вход выполнен успешно!"
 
-#: task_manager/views.py:18
-msgid "Log in"
+#: task_manager/views.py:17
+msgid "Login"
 msgstr "Вход"
+
+#~ msgid "Logout"
+#~ msgstr "Выход"
