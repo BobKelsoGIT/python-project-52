@@ -29,7 +29,7 @@ class TaskFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(TaskFilter, self).__init__(*args, **kwargs)
-        for _, filter_ in self.filters.items():
+        for filter_name, filter_ in self.filters.items():
             filter_.field.label_suffix = ""
         self.filters['status'].field.widget.attrs.update(
             {'class': 'form-select ml-2 mr-3'})
