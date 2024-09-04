@@ -317,7 +317,7 @@ msgstr "Задание успешно удалено"
 
 #: task_manager/views.py:15
 msgid "Logged in successfully!"
-msgstr "Вход выполнен успешно!"
+msgstr "Вы залогинены', 'Вход выполнен успешно!"
 
 #: task_manager/views.py:18
 msgid "Login"
