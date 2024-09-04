@@ -9,6 +9,7 @@ class TaskFilter(django_filters.FilterSet):
         widget=forms.CheckboxInput(),
         method='show_self_tasks',
         label=_('Show self tasks'),
+        label_suffix=""
     )
 
     class Meta:
