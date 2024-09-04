@@ -22,7 +22,6 @@ class UserLoginView(SuccessMessageMixin, LoginView):
 
 class UserLogoutView(SuccessMessageMixin, LogoutView):
     next_page = reverse_lazy('home')
-    success_message = _('Logged out successfully!')
 
     def dispatch(self, request, *args, **kwargs):
         messages.info(request, _('Logged out successfully!'))
