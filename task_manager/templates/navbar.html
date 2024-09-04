@@ -24,7 +24,7 @@
         {% if user.is_authenticated %}
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <h3><span class="badge bg-info me-3">{% trans 'Welcome' %}, {{ user.username }}</span></h3>
+                <span class="fs-6 fw-light badge bg-info me-3 mt-2">{% trans 'Welcome' %}, {{ user.username }}</span></h4>
             </li>
             <li class="nav-item">
                 <form method="POST" action="{% url 'logout' %}">
