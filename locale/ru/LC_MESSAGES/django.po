@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 18:46+0300\n"
+"POT-Creation-Date: 2024-09-04 17:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -240,7 +240,6 @@ msgid "Log out"
 msgstr "Выход"
 
 #: task_manager/templates/navbar.html:39 task_manager/views.py:17
-#: task_manager/views.py:18
 msgid "Log in"
 msgstr "Вход"
 
@@ -319,3 +318,7 @@ msgstr "Задание успешно удалено"
 #: task_manager/views.py:15
 msgid "Logged in successfully!"
 msgstr "Вход выполнен успешно!"
+
+#: task_manager/views.py:18
+msgid "Login"
+msgstr "Войти"
