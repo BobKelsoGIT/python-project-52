@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 14:21+0300\n"
+"POT-Creation-Date: 2024-09-04 15:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -236,11 +236,11 @@ msgid "Welcome"
 msgstr "Добро пожаловать"
 
 #: task_manager/templates/navbar.html:32
-msgid "Log out"
+msgid "Log out1"
 msgstr "Выход"
 
-#: task_manager/templates/navbar.html:40 task_manager/views.py:18
-msgid "Log in"
+#: task_manager/templates/navbar.html:40
+msgid "Log in1"
 msgstr "Вход"
 
 #: task_manager/templates/navbar.html:43
@@ -319,9 +319,6 @@ msgstr "У вас нет прав для удаления других поль�
 msgid "Logged in successfully!"
 msgstr "Вход выполнен успешно!"
 
-#: task_manager/views.py:17
-msgid "Login"
+#: task_manager/views.py:17 task_manager/views.py:18
+msgid "Log in"
 msgstr "Вход"
-
-#~ msgid "Logout"
-#~ msgstr "Выход"
