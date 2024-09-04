@@ -75,9 +75,6 @@ msgid "Label was successfully deleted"
 msgstr "Метка успешно удалена"
 
 #: task_manager/labels/views.py:50
-#, fuzzy
-#| msgid ""
-#| "This label cannot be deleted because itis referenced by other objects"
 msgid "This label cannot be deleted because itis referenced by other objects."
 msgstr "Невозможно удалить метку, потому что она используется"
 
