@@ -33,8 +33,7 @@
                 </form>
             </li>
         </ul>
-        {% endif %}
-        {% if not user.is_authenticated %}
+        {% else %}
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
                 <a class="btn btn-success me-2" href="{% url 'login' %}">{% trans 'Log in1' %}</a>
