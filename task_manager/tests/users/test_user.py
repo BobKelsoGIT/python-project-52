@@ -44,11 +44,14 @@ class UserCRUDTest(TestCase):
         self.assertEqual(User.objects.filter(username='newuser').count(), 1)
 
     def test_user_update(self):
-        response = self.client.post(reverse('user_update',
-                                            kwargs={'pk': self.user.pk}), {
-            'first_name': 'Updated',
-            'last_name': 'Name'
-        })
+        response = self.client.post(
+            reverse('user_update', kwargs={'pk': self.user.pk}), {
+                'first_name': 'Updated',
+                'last_name': 'Name',
+                'username': self.user.username,
+                'password1': 'newpassword123',
+                'password2': 'newpassword123',
+            })
         self.assertEqual(response.status_code, 302)
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, 'Updated')
