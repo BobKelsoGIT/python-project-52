@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 15:36+0300\n"
+"POT-Creation-Date: 2024-09-04 17:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: task_manager/labels/models.py:10 task_manager/statuses/models.py:10
 #: task_manager/tasks/models.py:14 task_manager/templates/labels/index.html:14
@@ -39,11 +42,11 @@ msgstr "Метки"
 
 #: task_manager/labels/views.py:24
 msgid "Label successfully created"
-msgstr "Метка успешно создана"
+msgstr "Задача успешно создана."
 
 #: task_manager/labels/views.py:26 task_manager/templates/labels/index.html:9
 msgid "Create label"
-msgstr "Создать метку"
+msgstr "Создать задачу"
 
 #: task_manager/labels/views.py:27 task_manager/statuses/views.py:27
 #: task_manager/tasks/views.py:40 task_manager/users/views.py:32
@@ -52,11 +55,11 @@ msgstr "Создать"
 
 #: task_manager/labels/views.py:36
 msgid "Label successfully updated"
-msgstr "Метка успешно обновлена"
+msgstr "Задача успешно обновлена."
 
 #: task_manager/labels/views.py:38
 msgid "Update label"
-msgstr "Обновить метку"
+msgstr "Обновить задачу"
 
 #: task_manager/labels/views.py:39 task_manager/statuses/views.py:39
 #: task_manager/tasks/views.py:56 task_manager/templates/labels/index.html:29
@@ -233,14 +236,15 @@ msgid "Welcome"
 msgstr "Добро пожаловать"
 
 #: task_manager/templates/navbar.html:32
-msgid "Log out1"
+msgid "Log out"
 msgstr "Выход"
 
-#: task_manager/templates/navbar.html:40
-msgid "Log in1"
+#: task_manager/templates/navbar.html:39 task_manager/views.py:17
+#: task_manager/views.py:18
+msgid "Log in"
 msgstr "Вход"
 
-#: task_manager/templates/navbar.html:43
+#: task_manager/templates/navbar.html:42
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -315,7 +319,3 @@ msgstr "У вас нет прав для удаления других поль�
 #: task_manager/views.py:15
 msgid "Logged in successfully!"
 msgstr "Вход выполнен успешно!"
-
-#: task_manager/views.py:17 task_manager/views.py:18
-msgid "Log in"
-msgstr "Вход"
