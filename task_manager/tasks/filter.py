@@ -1,5 +1,6 @@
 import django_filters
 from .models import Task
+from task_manager.labels.models import Label
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -10,6 +11,11 @@ class TaskFilter(django_filters.FilterSet):
         method='show_self_tasks',
         label=_('Show self tasks'),
         label_suffix=""
+    )
+
+    labels = django_filters.ModelChoiceFilter(
+        queryset=Label.objects.all(),
+        label=_('Label')
     )
 
     class Meta:
@@ -23,7 +29,7 @@ class TaskFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(TaskFilter, self).__init__(*args, **kwargs)
-        for field_name, filter_ in self.filters.items():
+        for _, filter_ in self.filters.items():
             filter_.field.label_suffix = ""
         self.filters['status'].field.widget.attrs.update(
             {'class': 'form-select ml-2 mr-3'})
