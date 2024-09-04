@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-03 18:31+0300\n"
+"POT-Creation-Date: 2024-09-04 13:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,8 +239,8 @@ msgstr "Добро пожаловать"
 msgid "Logout"
 msgstr "Выход"
 
-#: task_manager/templates/navbar.html:40 task_manager/views.py:18
-msgid "Log in"
+#: task_manager/templates/navbar.html:40 task_manager/views.py:17
+msgid "Login"
 msgstr "Вход"
 
 #: task_manager/templates/navbar.html:43
@@ -299,7 +299,7 @@ msgstr "Создать пользователя"
 msgid "User successfully updated"
 msgstr "Пользователь успешно обновлен"
 
-#: task_manager/users/views.py:43
+#: task_manager/users/views.py:44
 msgid "You have no rights to change another user."
 msgstr "У вас нет прав для изменения других пользователей"
 
@@ -319,6 +319,6 @@ msgstr "У вас нет прав для удаления других поль�
 msgid "Logged in successfully!"
 msgstr "Вход выполнен успешно!"
 
-#: task_manager/views.py:17
-msgid "Login"
+#: task_manager/views.py:18
+msgid "Log in"
 msgstr "Вход"
