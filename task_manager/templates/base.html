@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+
 {% load django_bootstrap5 %}
 {% load i18n %}
-<html lang="ru-ru">
+{% get_current_language as LANGUAGE_CODE %}
+
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% trans 'Task Manager' %}</title>
