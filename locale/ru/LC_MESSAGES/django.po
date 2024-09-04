@@ -289,7 +289,7 @@ msgstr "Фамилия"
 
 #: task_manager/users/views.py:29
 msgid "User successfully created"
-msgstr "Пользователь успешно создан"
+msgstr "Пользователь успешно зарегистрирован"
 
 #: task_manager/users/views.py:31
 msgid "Create user"
