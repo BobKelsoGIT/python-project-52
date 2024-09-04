@@ -34,7 +34,7 @@
                     <td><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></td>
                     <td>{{ task.status }}</td>
                     <td>{{ task.author }}</td>
-                    <td>{{ task.executor }}</td>
+                    <td>{{ task.executor|default:"" }}</td>
                     <td>{{ task.date_created|date:"d.m.Y H:i" }}</td>
                     <td>
                         <a href="{% url 'task_update' task.id %}"

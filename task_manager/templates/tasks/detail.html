@@ -27,7 +27,7 @@
 
                     <div class="row p-1">
                         <div class="col">{% trans 'Executor' %}</div>
-                        <div class="col">{{ task.executor }}</div>
+                        <div class="col">{{ task.executor|default:"" }}</div>
                     </div>
 
                     <div class="row p-1">

@@ -136,7 +136,7 @@ msgstr "Автор"
 #: task_manager/tasks/models.py:41 task_manager/templates/tasks/detail.html:29
 #: task_manager/templates/tasks/index.html:24
 msgid "Executor"
-msgstr "Испольнитель"
+msgstr "Исполнитель"
 
 #: task_manager/tasks/models.py:59
 msgid "Task"
