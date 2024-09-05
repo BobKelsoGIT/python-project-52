@@ -7,17 +7,6 @@ User = get_user_model()
 
 
 class UserForm(UserCreationForm):
-    first_name = forms.CharField(
-        max_length=150, required=True, label=_("First name")
-    )
-    last_name = forms.CharField(
-        max_length=150, required=True, label=_("Last name")
-    )
-
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = (
-            'first_name', 'last_name', 'username', 'password1', 'password2')
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -47,3 +36,8 @@ class UserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = (
+            'first_name', 'last_name', 'username', 'password1', 'password2')
