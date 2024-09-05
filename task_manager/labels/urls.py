@@ -1,8 +1,11 @@
 from django.urls import path
-from .views import (ListLabelView,
-                    CreateLabelView,
-                    UpdateLabelView,
-                    DeleteLabelView)
+
+from .views import (
+    CreateLabelView,
+    DeleteLabelView,
+    ListLabelView,
+    UpdateLabelView,
+)
 
 urlpatterns = [
     path('', ListLabelView.as_view(), name='labels_list'),

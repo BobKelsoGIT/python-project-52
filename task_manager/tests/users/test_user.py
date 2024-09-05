@@ -1,5 +1,5 @@
-from django.test import TestCase
 from django.core.exceptions import ObjectDoesNotExist
+from django.test import TestCase
 from django.urls import reverse
 from task_manager.users.models import User
 

@@ -1,9 +1,12 @@
 from django.urls import path
-from .views import (ListTaskView,
-                    DetailTaskView,
-                    CreateTaskView,
-                    UpdateTaskView,
-                    DeleteTaskView)
+
+from .views import (
+    CreateTaskView,
+    DeleteTaskView,
+    DetailTaskView,
+    ListTaskView,
+    UpdateTaskView,
+)
 
 urlpatterns = [
     path('', ListTaskView.as_view(), name='tasks_list'),
