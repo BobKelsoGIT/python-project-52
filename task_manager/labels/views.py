@@ -12,12 +12,13 @@ class ListLabelView(AuthRequiredMixin, ListView):
     model = Label
     template_name = 'labels/index.html'
     context_object_name = 'labels'
+    ordering = ['pk']
 
 
 class CreateLabelView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     form_class = LabelForm
-    template_name = 'form.html'
+    template_name = 'components/form.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label successfully created')
     extra_context = {
@@ -29,7 +30,7 @@ class CreateLabelView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 class UpdateLabelView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
-    template_name = 'form.html'
+    template_name = 'components/form.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label successfully updated')
     extra_context = {
@@ -41,7 +42,7 @@ class UpdateLabelView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 class DeleteLabelView(DeleteProtectionMixin, AuthRequiredMixin,
                       SuccessMessageMixin, DeleteView):
     model = Label
-    template_name = 'delete_form.html'
+    template_name = 'components/delete_form.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Label was successfully deleted')
     protected_url = reverse_lazy('labels_list')

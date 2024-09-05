@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "components/base.html" %}
 {% load i18n %}
 
 {% block title %}
@@ -9,6 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-auto">
+
             <h1 class="my-4">
                 {% blocktrans with object as obj %}
                 Are you sure you want to delete {{ obj }}?
@@ -20,6 +20,7 @@
                 <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
                 <a href="{{ cancel_url }}" class="btn btn-secondary">{% trans "Cancel" %}</a>
             </form>
+
         </div>
     </div>
 </div>

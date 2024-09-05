@@ -12,12 +12,13 @@ class ListStatusView(AuthRequiredMixin, ListView):
     model = Status
     template_name = 'statuses/index.html'
     context_object_name = 'statuses'
+    ordering = ['pk']
 
 
 class CreatStatusView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Status
     form_class = StatusForm
-    template_name = 'form.html'
+    template_name = 'components/form.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully created')
     extra_context = {
@@ -29,7 +30,7 @@ class CreatStatusView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 class UpdateStatusView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
-    template_name = 'form.html'
+    template_name = 'components/form.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully updated')
     extra_context = {
@@ -41,7 +42,7 @@ class UpdateStatusView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 class DeleteStatusView(AuthRequiredMixin, DeleteProtectionMixin,
                        SuccessMessageMixin, DeleteView):
     model = Status
-    template_name = 'delete_form.html'
+    template_name = '/componentsdelete_form.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully deleted')
     protected_message = _('Can not be deleted. In use.')

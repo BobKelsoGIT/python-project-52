@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
-
+{% extends 'components/base.html' %}
 {% load i18n %}
 {% load django_bootstrap5 %}
+
 {% block title %}
     {{ title }} | {% translate 'Task Manager' %}
 {% endblock %}
+
 {% block content %}
 <body class="d-flex flex-column min-vh-100">
     <div class="container d-flex align-items-center justify-content-center h-100">

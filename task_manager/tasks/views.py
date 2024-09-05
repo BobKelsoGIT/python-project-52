@@ -15,6 +15,7 @@ class ListTaskView(AuthRequiredMixin, FilterView):
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
     filterset_class = TaskFilter
+    ordering = ['pk']
 
 
 class DetailTaskView(AuthRequiredMixin, DetailView):
@@ -30,7 +31,7 @@ class DetailTaskView(AuthRequiredMixin, DetailView):
 class CreateTaskView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
     form_class = TaskForm
-    template_name = 'form.html'
+    template_name = 'components/form.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task successfully created')
     extra_context = {
@@ -46,7 +47,7 @@ class CreateTaskView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 class UpdateTaskView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Task
     form_class = TaskForm
-    template_name = 'form.html'
+    template_name = 'components/form.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task successfully updated')
     extra_context = {
@@ -58,7 +59,7 @@ class UpdateTaskView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 class DeleteTaskView(AuthRequiredMixin, AuthorDeletionMixin,
                      SuccessMessageMixin, DeleteView):
     model = Task
-    template_name = 'delete_form.html'
+    template_name = 'components/delete_form.html'
     success_url = reverse_lazy('tasks_list')
     success_message = _('Task successfully deleted')
     auth_message = _('Log in please!')
