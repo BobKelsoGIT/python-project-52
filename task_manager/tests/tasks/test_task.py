@@ -1,9 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
-from task_manager.users.models import User
+
+User = get_user_model()
 
 
 class TaskViewsTest(TestCase):
@@ -41,10 +43,10 @@ class TaskViewsTest(TestCase):
     def test_task_update(self):
         response = self.client.post(reverse('task_update',
                                             args=[self.task.pk]), {
-            'name': 'Updated Task',
-            'description': 'Updated description',
-            'status': self.status.pk,
-        })
+                                        'name': 'Updated Task',
+                                        'description': 'Updated description',
+                                        'status': self.status.pk,
+                                    })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('tasks_list'))
         self.task.refresh_from_db()
@@ -72,8 +74,8 @@ class TaskViewsTest(TestCase):
         self.client.logout()
         response = self.client.post(reverse('task_update',
                                             kwargs={'pk': self.task.pk}), {
-            'name': 'Updated Task'
-        })
+                                        'name': 'Updated Task'
+                                    })
         self.assertEqual(response.status_code, 302)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))

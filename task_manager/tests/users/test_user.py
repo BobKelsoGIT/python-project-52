@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse
-from task_manager.users.models import User
+
+User = get_user_model()
 
 
 class UserCRUDTest(TestCase):
@@ -61,9 +63,9 @@ class UserCRUDTest(TestCase):
         self.client.logout()
         response = self.client.post(reverse('user_update',
                                             kwargs={'pk': self.user.pk}), {
-            'first_name': 'Unauthorized',
-            'last_name': 'Update'
-        })
+                                        'first_name': 'Unauthorized',
+                                        'last_name': 'Update'
+                                    })
         self.assertNotEqual(response.status_code, 200)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))
@@ -92,9 +94,9 @@ class UserCRUDTest(TestCase):
                                               password='otherpass')
         response = self.client.post(reverse('user_update',
                                             kwargs={'pk': other_user.pk}), {
-            'first_name': 'Wrong',
-            'last_name': 'User'
-        })
+                                        'first_name': 'Wrong',
+                                        'last_name': 'User'
+                                    })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('users'))
         self.assertTrue(User.objects.filter(pk=other_user.pk).exists())

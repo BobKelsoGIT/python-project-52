@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse
 from task_manager.statuses.models import Status
-from task_manager.users.models import User
+
+User = get_user_model()
 
 
 class StatusViewsTest(TestCase):
@@ -34,8 +36,8 @@ class StatusViewsTest(TestCase):
     def test_status_update(self):
         response = self.client.post(reverse('status_update',
                                             kwargs={'pk': self.status.pk}), {
-            'name': 'Updated Status'
-        })
+                                        'name': 'Updated Status'
+                                    })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('statuses_list'))
         self.status.refresh_from_db()
@@ -63,8 +65,8 @@ class StatusViewsTest(TestCase):
         self.client.logout()
         response = self.client.post(reverse('status_update',
                                             kwargs={'pk': self.status.pk}), {
-            'name': 'Updated Status'
-        })
+                                        'name': 'Updated Status'
+                                    })
         self.assertEqual(response.status_code, 302)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))

@@ -1,10 +1,12 @@
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 from django.urls import reverse
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task, TaskLabelRelation
-from task_manager.users.models import User
+
+User = get_user_model()
 
 
 class LabelViewsTest(TestCase):
@@ -36,8 +38,8 @@ class LabelViewsTest(TestCase):
     def test_label_update(self):
         response = self.client.post(reverse('label_update',
                                             args=[self.label.pk]), {
-            'name': 'Updated Label'
-        })
+                                        'name': 'Updated Label'
+                                    })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('labels_list'))
         self.label.refresh_from_db()
@@ -82,8 +84,8 @@ class LabelViewsTest(TestCase):
         self.client.logout()
         response = self.client.post(reverse('label_update',
                                             kwargs={'pk': self.label.pk}), {
-            'name': 'Updated Label'
-        })
+                                        'name': 'Updated Label'
+                                    })
         self.assertEqual(response.status_code, 302)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))
