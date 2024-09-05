@@ -7,7 +7,7 @@ from task_manager.mixins import AuthorDeletionMixin, AuthRequiredMixin
 
 from .filter import TaskFilter
 from .models import Task
-from .task_form import TaskForm
+from .forms import TaskForm
 
 
 class ListTaskView(AuthRequiredMixin, FilterView):

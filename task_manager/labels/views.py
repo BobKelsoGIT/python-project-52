@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
 
-from .label_form import LabelForm
+from .forms import LabelForm
 from .models import Label
 
 

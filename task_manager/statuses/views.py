@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
 
 from .models import Status
-from .status_form import StatusForm
+from .forms import StatusForm
 
 
 class ListStatusView(AuthRequiredMixin, ListView):
