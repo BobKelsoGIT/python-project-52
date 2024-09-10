@@ -42,7 +42,7 @@ class UpdateStatusView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 class DeleteStatusView(AuthRequiredMixin, DeleteProtectionMixin,
                        SuccessMessageMixin, DeleteView):
     model = Status
-    template_name = '/componentsdelete_form.html'
+    template_name = 'components/delete_form.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _('Status successfully deleted')
     protected_message = _('Can not be deleted. In use.')
