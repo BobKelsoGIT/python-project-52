@@ -11,22 +11,12 @@ class TaskFilter(django_filters.FilterSet):
         widget=forms.CheckboxInput(),
         method='show_self_tasks',
         label=_('Show self tasks'),
-        label_suffix=""
     )
 
     labels = django_filters.ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=_('Label')
     )
-
-    class Meta:
-        model = Task
-        fields = ['status', 'executor', 'labels']
-        widgets = {
-            'status': forms.Select(),
-            'executor': forms.Select(),
-            'labels': forms.Select()
-        }
 
     def __init__(self, *args, **kwargs):
         super(TaskFilter, self).__init__(*args, **kwargs)
@@ -42,3 +32,7 @@ class TaskFilter(django_filters.FilterSet):
     def show_self_tasks(self, queryset, name, value):
         user = self.request.user if self.request else None
         return queryset.filter(author=user) if value else queryset
+
+    class Meta:
+        model = Task
+        fields = ['status', 'executor', 'labels']
