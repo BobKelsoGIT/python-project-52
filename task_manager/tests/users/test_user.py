@@ -37,7 +37,6 @@ class UserCRUDTest(TestCase):
         self.assertTrue(User.objects.filter(username='newuser').exists())
 
     def test_user_update(self):
-
         response = self.client.get(
             reverse('user_update', kwargs={'pk': self.user.pk}))
         self.assertTemplateUsed(response, 'components/form.html')
@@ -60,11 +59,9 @@ class UserCRUDTest(TestCase):
 
     def test_user_update_not_logged_in(self):
         self.client.logout()
-        response = self.client.post(reverse('user_update',
-                                            kwargs={'pk': self.user.pk}), {
-                                        'first_name': 'Unauthorized',
-                                        'last_name': 'Update'
-                                    })
+        response = self.client.post(
+            reverse('user_update', kwargs={'pk': self.user.pk}),
+            {'first_name': 'Unauthorized', 'last_name': 'Update'})
         self.assertNotEqual(response.status_code, 200)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))
@@ -73,16 +70,16 @@ class UserCRUDTest(TestCase):
         self.assertNotEqual(self.user.last_name, 'Update')
 
     def test_user_delete(self):
-        response = self.client.post(reverse('user_delete',
-                                            kwargs={'pk': self.user.pk}))
+        response = self.client.post(
+            reverse('user_delete', kwargs={'pk': self.user.pk}))
         self.assertEqual(response.status_code, 302)
         with self.assertRaises(ObjectDoesNotExist):
             User.objects.get(pk=self.user.pk)
 
     def test_user_delete_not_logged_in(self):
         self.client.logout()
-        response = self.client.post(reverse('user_delete',
-                                            kwargs={'pk': self.user.pk}))
+        response = self.client.post(
+            reverse('user_delete', kwargs={'pk': self.user.pk}))
         self.assertNotEqual(response.status_code, 200)
         login_url = reverse('login')
         self.assertTrue(response.url.startswith(login_url))
@@ -91,11 +88,9 @@ class UserCRUDTest(TestCase):
     def test_user_update_different_user(self):
         other_user = User.objects.create_user(username='otheruser',
                                               password='otherpass')
-        response = self.client.post(reverse('user_update',
-                                            kwargs={'pk': other_user.pk}), {
-                                        'first_name': 'Wrong',
-                                        'last_name': 'User'
-                                    })
+        response = self.client.post(
+            reverse('user_update', kwargs={'pk': other_user.pk}),
+            {'first_name': 'Wrong', 'last_name': 'User'})
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('users'))
         self.assertTrue(User.objects.filter(pk=other_user.pk).exists())
@@ -103,8 +98,8 @@ class UserCRUDTest(TestCase):
     def test_user_delete_different_user(self):
         other_user = User.objects.create_user(username='otheruser',
                                               password='otherpass')
-        response = self.client.post(reverse('user_delete',
-                                            kwargs={'pk': other_user.pk}))
+        response = self.client.post(
+            reverse('user_delete', kwargs={'pk': other_user.pk}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('users'))
         self.assertTrue(User.objects.filter(pk=other_user.pk).exists())

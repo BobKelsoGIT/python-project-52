@@ -6,8 +6,8 @@ from django_filters.views import FilterView
 from task_manager.mixins import AuthorDeletionMixin, AuthRequiredMixin
 
 from .filter import TaskFilter
-from .models import Task
 from .forms import TaskForm
+from .models import Task
 
 
 class ListTaskView(AuthRequiredMixin, FilterView):

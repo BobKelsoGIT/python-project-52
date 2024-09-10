@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
 
-from .models import Status
 from .forms import StatusForm
+from .models import Status
 
 
 class ListStatusView(AuthRequiredMixin, ListView):

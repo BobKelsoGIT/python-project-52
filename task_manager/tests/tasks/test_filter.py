@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
 from task_manager.tasks.filter import TaskFilter

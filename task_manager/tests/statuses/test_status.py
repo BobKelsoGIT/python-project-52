@@ -33,18 +33,17 @@ class StatusCRUDTest(TestCase):
         self.assertTrue(Status.objects.filter(name='New Status').exists())
 
     def test_status_update(self):
-        response = self.client.post(reverse('status_update',
-                                            kwargs={'pk': self.status.pk}), {
-                                        'name': 'Updated Status'
-                                    })
+        response = self.client.post(
+            reverse('status_update', kwargs={'pk': self.status.pk}),
+            {'name': 'Updated Status'})
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('statuses_list'))
         self.status.refresh_from_db()
         self.assertEqual(self.status.name, 'Updated Status')
 
     def test_status_delete(self):
-        response = self.client.post(reverse('status_delete',
-                                            kwargs={'pk': self.status.pk}))
+        response = self.client.post(
+            reverse('status_delete', kwargs={'pk': self.status.pk}))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('statuses_list'))
         with self.assertRaises(ObjectDoesNotExist):
