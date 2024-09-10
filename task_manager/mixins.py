@@ -56,17 +56,8 @@ class DeleteProtectionMixin:
             return redirect(self.protected_url)
 
 
-class BaseDeleteView(LoginRequiredMixin, DeleteProtectionMixin,
-                     SuccessMessageMixin, DeleteView):
+class BaseDeleteView(BaseFormView, DeleteProtectionMixin, DeleteView):
     template_name = 'components/delete_form.html'
-
-    def get_success_url(self):
-        return reverse_lazy(self.success_url_name)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(self.extra_context)
-        return context
 
 
 class UserPermissionMixin(UserPassesTestMixin):
