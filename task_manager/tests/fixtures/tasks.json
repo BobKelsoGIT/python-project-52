@@ -1,0 +1,46 @@
+[
+  {
+    "model": "tasks.task",
+    "pk": 4,
+    "fields": {
+      "name": "Задача 1",
+      "description": "Новая, без исполнителя, без метки",
+      "date_created": "2024-09-08T11:08:01.546Z",
+      "author": 1,
+      "status": 2,
+      "executor": null
+    }
+  },
+  {
+    "model": "tasks.task",
+    "pk": 5,
+    "fields": {
+      "name": "Задача 2",
+      "description": "В работе, с исполнителем, без метки",
+      "date_created": "2024-09-08T11:08:38.246Z",
+      "author": 2,
+      "status": 3,
+      "executor": 1
+    }
+  },
+  {
+    "model": "tasks.task",
+    "pk": 7,
+    "fields": {
+      "name": "Задача 3",
+      "description": "Завершена, с исполнителем, с метками",
+      "date_created": "2024-09-08T11:20:12.727Z",
+      "author": 1,
+      "status": 4,
+      "executor": 2
+    }
+  },
+  {
+    "model": "tasks.tasklabelrelation",
+    "pk": 2,
+    "fields": {
+      "task": 7,
+      "label": 4
+    }
+  }
+]

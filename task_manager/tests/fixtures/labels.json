@@ -1,0 +1,26 @@
+[
+  {
+    "model": "labels.label",
+    "pk": 3,
+    "fields": {
+      "name": "Метка 1",
+      "date_created": "2024-09-08T11:06:43.756Z"
+    }
+  },
+  {
+    "model": "labels.label",
+    "pk": 4,
+    "fields": {
+      "name": "Метка 2",
+      "date_created": "2024-09-08T11:06:48.025Z"
+    }
+  },
+  {
+    "model": "labels.label",
+    "pk": 5,
+    "fields": {
+      "name": "Метка 3",
+      "date_created": "2024-09-08T11:06:52.151Z"
+    }
+  }
+]

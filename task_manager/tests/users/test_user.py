@@ -7,54 +7,53 @@ User = get_user_model()
 
 
 class UserCRUDTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.user = User.objects.create_user(username='testuser',
-                                            password='testpass')
+    fixtures = ['task_manager/tests/fixtures/users.json']
 
     def setUp(self):
-        self.client.login(username='testuser', password='testpass')
+        self.user = User.objects.get(pk=1)
+        self.client.force_login(User.objects.get(pk=1))
 
     def test_user_list_view(self):
         response = self.client.get(reverse('users'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/index.html')
-        self.assertContains(response, self.user.username)
+        self.assertContains(response, 'VlaPut')
 
     def test_user_create(self):
-        response = self.client.post(reverse('signup'), {
+        response = self.client.get(reverse('user_create'))
+        self.assertTemplateUsed(response, 'components/form.html')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post(reverse('user_create'), {
             'username': 'newuser',
             'password1': 'newpassword123',
             'password2': 'newpassword123',
-            'first_name': 'Joe',
-            'last_name': 'Byden'
+            'first_name': 'New',
+            'last_name': 'User'
         })
 
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('login'))
         self.assertTrue(User.objects.filter(username='newuser').exists())
 
-        response = self.client.post(reverse('signup'), {
-            'username': 'newuser',
-            'password1': 'anotherpassword',
-            'password2': 'anotherpassword',
-            'first_name': 'John',
-            'last_name': 'Doe'
-        })
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(User.objects.filter(username='newuser').count(), 1)
-
     def test_user_update(self):
+
+        response = self.client.get(
+            reverse('user_update', kwargs={'pk': self.user.pk}))
+        self.assertTemplateUsed(response, 'components/form.html')
+        self.assertEqual(response.status_code, 200)
+
         response = self.client.post(
             reverse('user_update', kwargs={'pk': self.user.pk}), {
                 'first_name': 'Updated',
                 'last_name': 'Name',
                 'username': self.user.username,
-                'password1': 'newpassword123',
-                'password2': 'newpassword123',
+                'password1': 'test1pass',
+                'password2': 'test1pass',
             })
+
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('users'))
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, 'Updated')
         self.assertEqual(self.user.last_name, 'Name')

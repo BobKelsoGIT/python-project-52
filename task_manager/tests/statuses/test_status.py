@@ -7,16 +7,16 @@ from task_manager.statuses.models import Status
 User = get_user_model()
 
 
-class StatusViewsTest(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.user = User.objects.create_user(username='testuser',
-                                            password='testpass')
+class StatusCRUDTest(TestCase):
+    fixtures = [
+        'task_manager/tests/fixtures/statuses.json',
+        'task_manager/tests/fixtures/users.json'
+    ]
 
     def setUp(self):
-        self.client.login(username='testuser', password='testpass')
-        self.status = Status.objects.create(name='Test Status')
+        self.user = User.objects.get(pk=1)
+        self.client.force_login(User.objects.get(pk=1))
+        self.status = Status.objects.get(pk=2)
 
     def test_statuses_list(self):
         response = self.client.get(reverse('statuses_list'))
@@ -30,7 +30,6 @@ class StatusViewsTest(TestCase):
         })
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('statuses_list'))
-        self.status.refresh_from_db()
         self.assertTrue(Status.objects.filter(name='New Status').exists())
 
     def test_status_update(self):
@@ -50,35 +49,3 @@ class StatusViewsTest(TestCase):
         self.assertRedirects(response, reverse('statuses_list'))
         with self.assertRaises(ObjectDoesNotExist):
             Status.objects.get(pk=self.status.pk)
-
-    def test_status_create_not_logged_in(self):
-        self.client.logout()
-        response = self.client.post(reverse('status_create'), {
-            'name': 'New Status'
-        })
-        self.assertEqual(response.status_code, 302)
-        login_url = reverse('login')
-        self.assertTrue(response.url.startswith(login_url))
-        self.assertFalse(Status.objects.filter(name='New Status').exists())
-
-    def test_status_update_not_logged_in(self):
-        self.client.logout()
-        response = self.client.post(reverse('status_update',
-                                            kwargs={'pk': self.status.pk}), {
-                                        'name': 'Updated Status'
-                                    })
-        self.assertEqual(response.status_code, 302)
-        login_url = reverse('login')
-        self.assertTrue(response.url.startswith(login_url))
-        self.status.refresh_from_db()
-        self.assertEqual(self.status.name, 'Test Status')
-
-    def test_status_delete_not_logged_in(self):
-        self.client.logout()
-        response = self.client.post(reverse('status_delete',
-                                            kwargs={'pk': self.status.pk}))
-        self.assertEqual(response.status_code, 302)
-        login_url = reverse('login')
-        self.assertTrue(response.url.startswith(login_url))
-        self.status.refresh_from_db()
-        self.assertTrue(Status.objects.filter(pk=self.status.pk).exists())

@@ -1,0 +1,26 @@
+[
+  {
+    "model": "statuses.status",
+    "pk": 2,
+    "fields": {
+      "name": "Новая",
+      "date_created": "2024-09-08T11:05:56.964Z"
+    }
+  },
+  {
+    "model": "statuses.status",
+    "pk": 3,
+    "fields": {
+      "name": "В работе",
+      "date_created": "2024-09-08T11:06:09.977Z"
+    }
+  },
+  {
+    "model": "statuses.status",
+    "pk": 4,
+    "fields": {
+      "name": "Завершена",
+      "date_created": "2024-09-08T11:06:37.277Z"
+    }
+  }
+]
