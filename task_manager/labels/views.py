@@ -1,25 +1,26 @@
-from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
-from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
+from task_manager.mixins import (
+    BaseCreateView,
+    BaseDeleteView,
+    BaseListView,
+    BaseUpdateView,
+)
 
 from .forms import LabelForm
 from .models import Label
 
 
-class ListLabelView(AuthRequiredMixin, ListView):
+class ListLabelView(BaseListView):
     model = Label
     template_name = 'labels/index.html'
     context_object_name = 'labels'
-    ordering = ['pk']
 
 
-class CreateLabelView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
+class CreateLabelView(BaseCreateView):
     model = Label
     form_class = LabelForm
-    template_name = 'components/form.html'
-    success_url = reverse_lazy('labels_list')
+    success_url_name = 'labels_list'
     success_message = _('Label successfully created')
     extra_context = {
         'title': _('Create label'),
@@ -27,11 +28,10 @@ class CreateLabelView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class UpdateLabelView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateLabelView(BaseUpdateView):
     model = Label
     form_class = LabelForm
-    template_name = 'components/form.html'
-    success_url = reverse_lazy('labels_list')
+    success_url_name = 'labels_list'
     success_message = _('Label successfully updated')
     extra_context = {
         'title': _('Update label'),
@@ -39,13 +39,12 @@ class UpdateLabelView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     }
 
 
-class DeleteLabelView(DeleteProtectionMixin, AuthRequiredMixin,
-                      SuccessMessageMixin, DeleteView):
+class DeleteLabelView(BaseDeleteView):
     model = Label
     template_name = 'components/delete_form.html'
-    success_url = reverse_lazy('labels_list')
+    success_url_name = 'labels_list'
     success_message = _('Label was successfully deleted')
-    protected_url = reverse_lazy('labels_list')
+    protected_url = 'labels_list'
     protected_message = _('This label cannot be deleted because it'
                           'is referenced by other objects.')
     extra_context = {

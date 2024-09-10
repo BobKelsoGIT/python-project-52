@@ -1,25 +1,26 @@
-from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
-from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
+from task_manager.mixins import (
+    BaseCreateView,
+    BaseDeleteView,
+    BaseListView,
+    BaseUpdateView,
+)
 
 from .forms import StatusForm
 from .models import Status
 
 
-class ListStatusView(AuthRequiredMixin, ListView):
+class ListStatusView(BaseListView):
     model = Status
     template_name = 'statuses/index.html'
     context_object_name = 'statuses'
-    ordering = ['pk']
 
 
-class CreatStatusView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
+class CreateStatusView(BaseCreateView):
     model = Status
     form_class = StatusForm
-    template_name = 'components/form.html'
-    success_url = reverse_lazy('statuses_list')
+    success_url_name = 'statuses_list'
     success_message = _('Status successfully created')
     extra_context = {
         'title': _('Create status'),
@@ -27,11 +28,10 @@ class CreatStatusView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     }
 
 
-class UpdateStatusView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
+class UpdateStatusView(BaseUpdateView):
     model = Status
     form_class = StatusForm
-    template_name = 'components/form.html'
-    success_url = reverse_lazy('statuses_list')
+    success_url_name = 'statuses_list'
     success_message = _('Status successfully updated')
     extra_context = {
         'title': _('Update status'),
@@ -39,14 +39,13 @@ class UpdateStatusView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     }
 
 
-class DeleteStatusView(AuthRequiredMixin, DeleteProtectionMixin,
-                       SuccessMessageMixin, DeleteView):
+class DeleteStatusView(BaseDeleteView):
     model = Status
     template_name = 'components/delete_form.html'
-    success_url = reverse_lazy('statuses_list')
+    success_url_name = 'statuses_list'
     success_message = _('Status successfully deleted')
+    protected_url_name = 'statuses_list'
     protected_message = _('Can not be deleted. In use.')
-    protected_url = reverse_lazy('statuses_list')
     extra_context = {
         'cancel_url': reverse_lazy('statuses_list')
     }
