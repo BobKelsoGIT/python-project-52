@@ -41,10 +41,9 @@ class UpdateStatusView(BaseUpdateView):
 
 class DeleteStatusView(BaseDeleteView):
     model = Status
-    template_name = 'components/delete_form.html'
     success_url_name = 'statuses_list'
     success_message = _('Status successfully deleted')
-    protected_url_name = 'statuses_list'
+    protected_url = 'statuses_list'
     protected_message = _('Can not be deleted. In use.')
     extra_context = {
         'cancel_url': reverse_lazy('statuses_list')

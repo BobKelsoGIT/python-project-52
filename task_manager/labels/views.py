@@ -41,7 +41,6 @@ class UpdateLabelView(BaseUpdateView):
 
 class DeleteLabelView(BaseDeleteView):
     model = Label
-    template_name = 'components/delete_form.html'
     success_url_name = 'labels_list'
     success_message = _('Label was successfully deleted')
     protected_url = 'labels_list'

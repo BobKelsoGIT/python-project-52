@@ -61,7 +61,6 @@ class UpdateTaskView(AuthRequiredMixin, BaseUpdateView):
 
 class DeleteTaskView(AuthRequiredMixin, AuthorDeletionMixin, BaseDeleteView):
     model = Task
-    template_name = 'components/delete_form.html'
     success_url_name = 'tasks_list'
     success_message = _('Task successfully deleted')
     auth_message = _('Log in please!')
